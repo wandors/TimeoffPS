@@ -68,11 +68,12 @@ class Ui_Form(object):
         self.pushButton_2.setFont(font)
         self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.setEnabled(False)
         self.gridLayout.addWidget(self.pushButton_2, 3, 1, 1, 1)
 
         self.retranslateUi(Form)
         self.pushButton.clicked.connect(self.run)
-        self.pushButton_2.clicked.connect(self.pushButton_2.click)
+        self.pushButton_2.clicked.connect(self.Stopesd)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.timeEdit, self.radioButton)
         Form.setTabOrder(self.radioButton, self.timeEdit_2)
@@ -91,13 +92,56 @@ class Ui_Form(object):
         self.pushButton.setText(_translate("Form", "ЗАПУСТИТИ"))
         self.pushButton_2.setText(_translate("Form", "ЗУПИНИТИ"))
 
-    
+
 
     def run(self):
         if self.radioButton.isChecked():
-            print("Hello")
+            self.bool = True
+            self.timer = QtCore.QTimer()
+            self.timer.setInterval(60000)
+            self.timer.setSingleShot(False)
+            self.timer.timeout.connect(self.Ckloc)
+            self.timer.start()
+            self.pushButton.setEnabled(False)
+            self.pushButton_2.setEnabled(True)
+            self.radioButton.setEnabled(False)
+            self.radioButton_2.setEnabled(False)
         else:
-            print("GOODS")
+            self.bool = False
+            self.tick = 0
+            self.timer_1 = QtCore.QTimer()
+            self.timer_1.setInterval(60000)
+            self.timer_1.setSingleShot(False)
+            self.timer_1.timeout.connect(self.Mins)
+            self.timer_1.start()
+            self.pushButton.setEnabled(False)
+            self.pushButton_2.setEnabled(True)
+            self.radioButton.setEnabled(False)
+            self.radioButton_2.setEnabled(False)
+
+    def Ckloc(self):
+        if time.strftime("%H:%M") == self.timeEdit.text():
+            subprocess.Popen("shutdown -s -t 0 -f", shell=True)
+
+    def Mins(self):
+        if int(self.timeEdit_2.text()) == self.tick:
+            subprocess.Popen("shutdown -s -t 0 -f", shell=True)
+        self.tick += 1
+
+    def Stopesd(self):
+        if self.bool:
+            self.timer.stop()
+            self.pushButton.setEnabled(True)
+            self.pushButton_2.setEnabled(False)
+            self.radioButton.setEnabled(True)
+            self.radioButton_2.setEnabled(True)
+        if not self.bool:
+            self.timer_1.stop()
+            self.pushButton.setEnabled(True)
+            self.pushButton_2.setEnabled(False)
+            self.radioButton.setEnabled(True)
+            self.radioButton_2.setEnabled(True)
+
 
 if __name__ == "__main__":
     import sys

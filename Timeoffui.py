@@ -15,6 +15,11 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(301, 138)
+        self.resolution = QtWidgets.QDesktopWidget().screenGeometry()
+        Form.move((self.resolution.width() / 2) - (Form.frameSize().width() / 2),
+                   (self.resolution.height() / 2) - (Form.frameSize().height() / 2))
+        Form.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
+
         font = QtGui.QFont()
         font.setPointSize(12)
         Form.setFont(font)

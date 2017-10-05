@@ -92,8 +92,6 @@ class Ui_Form(object):
         self.pushButton.setText(_translate("Form", "ЗАПУСТИТИ"))
         self.pushButton_2.setText(_translate("Form", "ЗУПИНИТИ"))
 
-
-
     def run(self):
         if self.radioButton.isChecked():
             self.bool = True
@@ -151,4 +149,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

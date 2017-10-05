@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Timeoffui.ui'
-#
-# Created by: PyQt5 UI code generator 5.9
-#
-# WARNING! All changes made in this file will be lost!
+__author__ = 'Сергі Полунець'
+__versions__ = "v.1.0.2"
 
 import time
 import subprocess
@@ -18,8 +15,7 @@ class Ui_Form(object):
         self.resolution = QtWidgets.QDesktopWidget().screenGeometry()
         Form.move((self.resolution.width() / 2) - (Form.frameSize().width() / 2),
                    (self.resolution.height() / 2) - (Form.frameSize().height() / 2))
-        Form.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
-
+        Form.setWindowFlags(QtCore.Qt.Dialog | QtCore.Qt.WindowCloseButtonHint)
         font = QtGui.QFont()
         font.setPointSize(12)
         Form.setFont(font)
@@ -88,7 +84,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "TimeOff"))
+        Form.setWindowTitle(_translate("Form", "TimeOff {0}".format(__versions__)))
         self.label.setText(_translate("Form", "АВТОВІДКЛЮЧЕННЯ"))
         self.timeEdit.setDisplayFormat(_translate("Form", "HH:mm"))
         self.radioButton.setText(_translate("Form", "в годинах"))
